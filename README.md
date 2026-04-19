@@ -70,7 +70,15 @@ Replace PORT with the one defined in docker-compose.yml
 
 ---
 
+## Manual installation (without Docker)
+
+The full explanation of how the project works and how to install it manually (without Docker) is available here:
+
+https://raw.githubusercontent.com/angelohavard0/masterpiece-high-school-2025-2026/main/resource/raport2.odt
+
+---
+
 ## Notes
 
 - First run may take time (image build)
-- Make sure Docker is running before starting
+- Make sure Docker is running before starting the project
