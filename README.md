@@ -62,11 +62,9 @@ docker compose up --build
 
 ## Access
 
-Once running, open:
+Once running, open your browser at:
 
-http://localhost:PORT
-
-Replace PORT with the one defined in docker-compose.yml
+http://localhost:80
 
 ---
 
