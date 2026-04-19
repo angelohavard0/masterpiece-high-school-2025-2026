@@ -1,0 +1,496 @@
+/* ========= VARIABLES ========= */
+
+:root {
+    /* couleur choisie par l'ia */
+    /*--background: #050814;*/
+    --background: url("/background.jpg");
+    --background2: #0b1220;
+    --background2cc: #0b1220cc;
+    --background3: #172033;
+    --background4: #1f2a40;
+    --text-color: #ffffff;
+    --text-color2: #f1f5f9;
+    --muted-text: #aebed1;
+    --title-color: #f8fafc;
+    --button-bg: #243247;
+    --button-hover-bg: #334155;
+    --button-selected-bg: #475569;
+    --border: #475569;
+
+    /* === blue === */
+    --blue: #60a5fa;
+    --blue-glow: #60a5fa4f; /* 31% */
+    --blue-glow-light: #60a5fa2f; /* 18% */
+    --blue-glow-ultra: #60a5fa1f; /* 12% */
+
+    /* === purple === */
+    --purple: #8b5cf6;
+    --purple-glow: #8b5cf64f; /* 31% */
+    --purple-glow-light: #8b5cf62f; /* 18% */
+    --purple-glow-ultra: #8b5cf61f; /* 12% */
+
+    /* === orange === */
+    --orange: #f59e0b;
+    --orange-glow: #f59e0b4f; /* 31% */
+    --orange-glow-light: #f59e0b2f; /* 18% */
+    --orange-glow-ultra: #f59e0b1f; /* 12% */
+
+    /* === green === */
+    --green: #10b981;
+    --green-glow: #10b9814f; /* 31% */
+    --green-glow-light: #10b9812f; /* 18% */
+    --green-glow-ultra: #10b9811f; /* 12% */
+
+    /* === red === */
+    --red: #ef4444;
+    --red-glow: #ef44444f; /* 31% */
+    --red-glow-light: #ef44442f; /* 18% */
+    --red-glow-ultra: #ef44441f; /* 12% */
+}
+
+/* ========= RESET / BASE ========= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: system-ui, "Segoe UI", "Noto Sans", Arial, sans-serif;
+}
+
+body {
+    background: var(--background);
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: var(--text-color);
+    height: 100vh;
+    width: 100vw;
+}
+
+/* ========= LAYOUT ========= */
+
+.app {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+    min-height: 0;
+}
+
+.topbar {
+    display: flex;
+    align-items: center;
+    height: 30px;
+    padding: 0 10px;
+    gap: 30px;
+    box-sizing: border-box;
+    background: var(--background2);
+    opacity: 0.9;
+    color: var(--text-color);
+}
+
+.views {
+    flex: 1;
+    display: grid;
+    min-height: 0;
+}
+
+.views > div {
+    grid-area: 1 / 1 / 2 / 2;
+    min-height: 0;
+}
+
+.views > .home {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.views > .beautiful {
+    display: flex;
+    padding: 20px;
+    flex: 1 1 0;
+    min-height: 0;
+    overflow: hidden;
+}
+
+.views .beautiful > div {
+    flex: 1 0 0;
+    min-height: 0;
+    background: var(--background3);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 30px;
+    color: var(--text-color);
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.none {
+    display: none !important;
+}
+
+/* ========= COMPONENTS ========= */
+
+small {
+    color: var(--muted-text);
+}
+
+hr {
+    margin-bottom: 20px;
+    margin-top: 5px;
+}
+
+.topbar button {
+    border: 1px solid var(--border);
+    height: 22px;
+    padding-left: 8px;
+    padding-right: 8px;
+    border-radius: 30px;
+    background: var(--button-bg);
+    color: var(--text-color);
+    transition: background 0.2s ease;
+}
+
+.topbar button.hidden:not(.selected) {
+    display: none;
+}
+
+.topbar button.selected {
+    background-color: var(--button-selected-bg);
+}
+
+.topbar button:hover {
+    background: var(--button-hover-bg);
+}
+
+.views > .home > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@media (max-width: 1199px) {
+    .views > .home > div {
+        flex: 1 1 300px;
+    }
+}
+
+@media (min-width: 1200px) and (max-width: 1499px) {
+    .views > .home > div {
+        flex: 1 1 400px;
+    }
+}
+
+@media (min-width: 1500px) {
+    .views > .home > div {
+        flex: 1 1 500px;
+    }
+}
+
+.views > .home .stat-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--background3);
+    color: var(--text-color);
+    gap: 8px;
+    border-radius: 10px;
+    padding: 20px;
+    flex: 0 1 300px;
+    border: 1px solid var(--border);
+}
+
+.views > .home .stat-card > h2 {
+    font-size: 28px;
+}
+
+.views > .home .stat-card.users {
+    border-left: 4px solid var(--blue);
+    box-shadow: 0 0 15px var(--blue-glow);
+}
+
+.views > .home .stat-card.users span {
+    color: var(--blue);
+}
+
+.views > .home .stat-card.admins {
+    border-left: 4px solid var(--purple);
+    box-shadow: 0 0 15px var(--purple-glow);
+}
+
+.views > .home .stat-card.admins span {
+    color: var(--purple);
+}
+
+.views > .home .stat-card.badges {
+    border-left: 4px solid var(--orange);
+    box-shadow: 0 0 15px var(--orange-glow);
+}
+
+.views > .home .stat-card.badges span {
+    color: var(--orange);
+}
+
+.views > .home .stat-card.logs {
+    border-left: 4px solid var(--green);
+    box-shadow: 0 0 15px var(--green-glow);
+}
+
+.views > .home .stat-card.logs span {
+    color: var(--green);
+}
+
+.views > .home .stat-card.failedlogs {
+    border-left: 4px solid var(--red);
+    box-shadow: 0 0 15px var(--red-glow);
+}
+
+.views > .home .stat-card.failedlogs span {
+    color: var(--red);
+}
+
+.views > .beautiful h2 {
+    padding-bottom: 20px;
+    color: var(--title-color);
+}
+
+.views > .beautiful h2 > .fa-solid {
+    color: var(--blue);
+}
+
+.views > .beautiful .legend {
+    padding: 10px;
+    margin-top: 10px;
+    display: flex;
+    gap: 10px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--background2cc);
+}
+
+.views > .beautiful .legend > div {
+    display: flex;
+}
+
+.views > .beautiful .legend > div > div {
+    margin-right: 5px;
+    height: 16px;
+    width: 16px;
+    border-radius: 4px;
+}
+
+.views > .beautiful .legend .success {
+    background: var(--green);
+}
+
+.views > .beautiful .legend .failed {
+    background-color: var(--red);
+}
+
+.views > .beautiful .legend .user {
+    background: var(--blue);
+}
+
+.views > .beautiful .legend .admin {
+    background-color: var(--purple);
+}
+
+.views > .beautiful .legend p {
+    font-size: 14px;
+    height: 16px;
+    padding: 1px 0;
+    color: var(--text-color2);
+}
+
+.views > .beautiful .table {
+    margin: 10px 0;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    overflow-x: auto;
+    overflow-y: visible;
+}
+.views > .beautiful .table table {
+    width: 100%;
+    min-width: 600px;
+    border-collapse: collapse;
+}
+
+.views > .beautiful .table th {
+    text-align: left;
+    padding: 0 16px;
+    font-size: 13px;
+    font-weight: 600;
+    height: 30px;
+    text-transform: uppercase;
+    border-bottom: 2px solid var(--border);
+}
+
+.views > .beautiful .table tr.success {
+    background: var(--green-glow-ultra);
+    border-left: 4px solid var(--green);
+}
+
+.views > .beautiful .table tr.failed {
+    background: var(--red-glow-ultra);
+    border-left: 4px solid var(--red);
+}
+
+.views > .beautiful .table tr.user {
+    background: var(--blue-glow-ultra);
+    border-left: 4px solid var(--blue);
+}
+
+.views > .beautiful .table tr.admin {
+    background: var(--purple-glow-ultra);
+    border-left: 4px solid var(--purple);
+}
+
+.views > .beautiful .table tr.badge {
+    background: var(--orange-glow-ultra);
+    border-left: 4px solid var(--orange);
+}
+
+.views > .beautiful .table td {
+    text-align: left;
+    padding: 0 16px;
+    font-size: 14px;
+    height: 30px;
+    border-bottom: 1px solid var(--border);
+}
+
+.views > .beautiful .table td button {
+    border: 1px solid var(--border);
+    height: 22px;
+    padding-left: 8px;
+    padding-right: 8px;
+    border-radius: 30px;
+    background: var(--button-bg);
+    color: var(--text-color);
+    transition: background 0.2s ease;
+}
+
+.views > .beautiful .table td button:hover {
+    background: var(--button-hover-bg);
+}
+
+.views > .beautiful .table td button.delete {
+    background: var(--red-glow-light);
+}
+
+.views > .beautiful .table td button.delete:hover {
+    background: var(--red-glow);
+}
+
+.views > .beautiful form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin: 10px 0;
+}
+
+.views > .beautiful form > * {
+    border: 1px solid var(--border);
+    height: 45px;
+    flex: 1 1 200px; /* prend l'espace dispo, minimum 200px */
+    display: flex;
+    gap: 10px;
+    padding: 10px;
+    border-radius: 8px;
+    background: var(--background2cc);
+    box-sizing: border-box;
+}
+
+.views > .beautiful form .text:has(input:focus) {
+    outline: auto;
+}
+
+.views > .beautiful form .text span {
+    margin: auto;
+}
+
+.views > .beautiful form .text input {
+    flex: 1 1 0;
+    min-width: 0;
+    background: none;
+    border: none;
+    color: var(--text-color2);
+}
+
+.views > .beautiful form .text input:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.views > .beautiful form .checkbox input {
+    margin: auto;
+    height: 16px;
+    aspect-ratio: 1/1;
+}
+
+.views > .beautiful form .checkbox input:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+.views > .beautiful form .checkbox span {
+    margin: auto;
+}
+
+.views > .beautiful form .checkbox p {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+}
+
+.views > .beautiful form button {
+    color: var(--text-color);
+    background: var(--button-bg);
+    flex: 1 1 150px; /* bouton flexible aussi */
+    transition: background 0.2s ease;
+}
+
+.views > .beautiful form button:hover {
+    background: var(--button-hover-bg);
+}
+
+.views > .beautiful form button.delete {
+    background: var(--red-glow-light);
+}
+
+.views > .beautiful form button.delete:hover {
+    background: var(--red-glow);
+}
+
+.views > .beautiful form button.tool {
+    background: var(--blue-glow-light);
+}
+
+.views > .beautiful form button.tool:hover {
+    background: var(--blue-glow);
+}
+
+.views > .beautiful form button span {
+    margin: auto;
+}
+
+.views > .beautiful form button p {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+}
+
+.swal2-popup {
+    background: var(--background3);
+}
+
+/* ========= STATES ========= */
+
+/* ========= RESPONSIVE ========= */

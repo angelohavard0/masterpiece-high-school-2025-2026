@@ -1,0 +1,46 @@
+services:
+  db:
+    image: postgres:16
+    container_name: masterpiece_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: dbcduser
+      POSTGRES_PASSWORD: ZmqGKrs9sTantWz
+      POSTGRES_DB: dbcd
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U dbcduser -d dbcd"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  app:
+    build: ./app
+    container_name: masterpiece_express
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./app:/app   # <-- ici le code local est monté dans le conteneur
+      - /app/node_modules  # <-- pour éviter d'écraser node_modules installés dans le conteneur
+
+  nginx:
+    image: nginx:stable
+    container_name: masterpiece_nginx
+    restart: unless-stopped
+    depends_on:
+      - app
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+
+volumes:
+  postgres_data:

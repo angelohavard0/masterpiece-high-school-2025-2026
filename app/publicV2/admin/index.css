@@ -1,0 +1,46 @@
+.stat-card:first-child {
+    border-left: 4px solid #60a5fa;
+    box-shadow: 0 0 15px var(--glow-n);
+} /* Bleu pour membres */
+.stat-card:nth-child(2) {
+    border-left: 4px solid #f59e0b;
+    box-shadow: 0 0 15px rgba(245, 158, 11, 0.5);
+} /* Orange pour badges */
+.stat-card:nth-child(3) {
+    border-left: 4px solid #8b5cf6;
+    box-shadow: 0 0 15px rgba(139, 92, 246, 0.5);
+} /* Violet pour admins */
+
+.stat-card:nth-child(2) i {
+    color: #f59e0b;
+} /* Icône orange pour badges */
+
+.search-bar {
+    margin-bottom: 20px;
+}
+.checkbox-group {
+    display: flex;
+    align-items: center;
+}
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    padding: 8px 12px;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text);
+    font-size: 14px;
+}
+.checkbox-label i {
+    color: #60a5fa;
+    width: 16px;
+}
+.checkbox-label input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    accent-color: #2563eb;
+}

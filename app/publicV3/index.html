@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Gestion Badges</title>
+        <link rel="stylesheet" href="/style.css" />
+        <link
+            rel="stylesheet"
+            href="/lib/fontawesome-free-6.5.0-web/css/all.min.css"
+        />
+    </head>
+    <body>
+        <div class="app">
+            <!-- Sidebar commune -->
+            <div class="sidebar">
+                <div class="logo">
+                    <i class="fa-solid fa-school"></i>
+                    <div>
+                        <span class="lycee">Lycée R. Queneau</span>
+                        <span class="sous-titre">Yvetot</span>
+                    </div>
+                </div>
+                <div class="sidebar-menu">
+                    <button
+                        onclick="showView('logs')"
+                        class="active"
+                        id="btnLogs"
+                    >
+                        <i class="fa-solid fa-clock"></i><span>Logs</span>
+                    </button>
+                    <button
+                        onclick="showView('admin')"
+                        id="btnAdmin"
+                    >
+                        <i class="fa-solid fa-users-gear"></i
+                        ><span>Gestion</span>
+                    </button>
+                </div>
+                <div class="system-info">
+                    <div class="info-item">
+                        <i class="fa-solid fa-qrcode"></i><span>RFID</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fa-solid fa-clock"></i>
+                        <span id="liveTime"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contenu principal -->
+            <div class="main">
+                <!-- Vue Logs (page d'accueil) -->
+                <div id="view-logs" class="page-view">
+                    <div class="header">
+                        <h1>Tableau de bord</h1>
+                        <div class="header-stats">
+                            <div class="stat-card">
+                                <i class="fa-solid fa-user-graduate"></i>
+                                <span id="totalUsers">0</span>
+                                <small>Membres</small>
+                            </div>
+                            <div class="stat-card">
+                                <i class="fa-solid fa-clock-rotate-left"></i>
+                                <span id="totalLogs">0</span>
+                                <small>Accès</small>
+                            </div>
+                            <div class="stat-card">
+                                <i class="fa-solid fa-triangle-exclamation"></i>
+                                <span id="failedLogs">0</span>
+                                <small>Refusés</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h2>
+                            <i class="fa-solid fa-list-check"></i> Historique
+                        </h2>
+                        <div class="legend">
+                            <div class="legend-item">
+                                <div class="color-box success-bg"></div>
+                                <span>Autorisé</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="color-box error-bg"></div>
+                                <span>Refusé</span>
+                            </div>
+                        </div>
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Nom</th>
+                                        <th>Prénom</th>
+                                        <th>UID</th>
+                                        <th>Date</th>
+                                        <th>Heure</th>
+                                        <th>Statut</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="logsTable"></tbody>
+                            </table>
+                        </div>
+                        <div id="noLogsMessage" class="empty-message hidden">
+                            <i class="fa-solid fa-clock"></i> Aucun passage
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Vue Admin -->
+                <div id="view-admin" class="page-view hidden">
+                    <div class="header">
+                        <h1>Administration</h1>
+                        <div class="header-stats">
+                            <div class="stat-card">
+                                <i class="fa-solid fa-user-graduate"></i>
+                                <span id="adminTotalUsers">0</span>
+                                <small>Membres</small>
+                            </div>
+                            <div class="stat-card">
+                                <i class="fa-solid fa-id-card"></i>
+                                <span id="adminTotalBadges">0</span>
+                                <small>Badges</small>
+                            </div>
+                            <div class="stat-card">
+                                <i class="fa-solid fa-user-tie"></i>
+                                <span id="adminTotalAdmins">0</span>
+                                <small>Administrateurs</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h2>
+                            <i class="fa-solid fa-user-plus"></i> Ajouter un
+                            membre
+                        </h2>
+                        <form id="userForm" class="form-grid">
+                            <div class="input-group">
+                                <i class="fa-solid fa-user"></i>
+                                <input
+                                    type="text"
+                                    id="firstname"
+                                    placeholder="Prénom"
+                                    required
+                                />
+                            </div>
+                            <div class="input-group">
+                                <i class="fa-solid fa-user"></i>
+                                <input
+                                    type="text"
+                                    id="lastname"
+                                    placeholder="Nom"
+                                    required
+                                />
+                            </div>
+                            <div class="checkbox-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="isAdmin" />
+                                    <i class="fa-solid fa-user-tie"></i>
+                                    <span>Administrateur</span>
+                                </label>
+                            </div>
+                            <button
+                                type="submit"
+                                id="addUserBtn"
+                                class="btn-primary"
+                            >
+                                <i class="fa-solid fa-plus"></i>Ajouter
+                            </button>
+                        </form>
+                    </div>
+                    <div class="card">
+                        <h2>
+                            <i class="fa-solid fa-search"></i> Rechercher un
+                            membre
+                        </h2>
+                        <div class="search-bar">
+                            <div class="input-group">
+                                <i class="fa-solid fa-search"></i>
+                                <input
+                                    type="text"
+                                    id="searchUser"
+                                    placeholder="Nom, prénom ou UID..."
+                                />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h2>
+                            <i class="fa-solid fa-users"></i> Résultats de
+                            recherche
+                        </h2>
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Prénom</th>
+                                        <th>Nom</th>
+                                        <th>Statut</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="usersTable"></tbody>
+                            </table>
+                        </div>
+                        <div id="noUsersMessage" class="empty-message">
+                            <i class="fa-solid fa-users-slash"></i> Aucun
+                            résultat
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Vue Profil Utilisateur -->
+                <div id="view-user" class="page-view hidden">
+                    <div class="header">
+                        <button
+                            onclick="showView('admin')"
+                            class="btn-secondary"
+                            style="margin-bottom: 15px"
+                        >
+                            <i class="fa-solid fa-arrow-left"></i> Retour
+                        </button>
+                        <h1>Profil utilisateur</h1>
+                    </div>
+                    <div class="card" id="userInfoCard">
+                        <h2>
+                            <i class="fa-solid fa-user"></i>
+                            <span id="userFullName">Chargement...</span>
+                        </h2>
+                        <div class="user-actions">
+                            <button id="deleteUser" class="delete-btn">
+                                <i class="fa-solid fa-trash"></i> Supprimer
+                                l'utilisateur
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <h2>
+                            <i class="fa-solid fa-microchip"></i> Badges
+                            associés
+                        </h2>
+                        <div class="scan-badge-section">
+                            <div class="scan-controls">
+                                <button
+                                    id="scanButton"
+                                    class="btn-primary"
+                                    onclick="startScan()"
+                                >
+                                    <i class="fa-solid fa-qrcode"></i> Scanner
+                                    un badge
+                                </button>
+                                <button
+                                    id="cancelScanButton"
+                                    class="btn-secondary hidden"
+                                    onclick="cancelScan()"
+                                >
+                                    <i class="fa-solid fa-times"></i> Annuler
+                                </button>
+                            </div>
+                            <div id="scanResult" class="scan-result hidden">
+                                <div class="input-group">
+                                    <i class="fa-solid fa-id-card"></i>
+                                    <input
+                                        type="text"
+                                        id="scannedBadgeUid"
+                                        placeholder="UID du badge scanné"
+                                        readonly
+                                    />
+                                </div>
+                                <button
+                                    class="btn-primary"
+                                    onclick="addScannedBadge()"
+                                >
+                                    <i class="fa-solid fa-plus"></i> Ajouter ce
+                                    badge
+                                </button>
+                            </div>
+                        </div>
+                        <div id="badgeList" class="badge-list"></div>
+                    </div>
+                    <div class="card">
+                        <h2>
+                            <i class="fa-solid fa-clock-rotate-left"></i>
+                            Historique des passages
+                        </h2>
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>UID</th>
+                                        <th>Date</th>
+                                        <th>Heure</th>
+                                        <th>Statut</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="userLogsTable"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="/lib/sweetalert2.all.min.js"></script>
+        <script src="/app.js"></script>
+    </body>
+</html>

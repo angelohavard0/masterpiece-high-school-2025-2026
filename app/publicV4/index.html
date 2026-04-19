@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Gestion Badges</title>
+        <link rel="stylesheet" href="/style.css" />
+        <link
+            rel="stylesheet"
+            href="/lib/fontawesome-free-6.5.0-web/css/all.min.css"
+        />
+    </head>
+    <body>
+        <div class="app">
+            <div class="topbar">
+                <span class="clock">10:08</span>
+                <span><button class="homebutton">Acceuil</button></span>
+                <span><button class="logsbutton">Historique</button></span>
+                <span><button class="adminbutton">Gestion</button></span>
+                <span
+                    ><button class="userbutton hidden">
+                        Utilisateur
+                    </button></span
+                >
+            </div>
+            <div class="views">
+                <div class="home">
+                    <div>
+                        <div class="stat-card users">
+                            <span class="fa-solid fa-user-graduate"></span>
+                            <h2>0</h2>
+                            <small>Membres</small>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="stat-card admins">
+                            <span class="fa-solid fa-user-tie"></span>
+                            <h2>0</h2>
+                            <small>Administrateurs</small>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="stat-card badges">
+                            <span class="fa-solid fa-id-card"></span>
+                            <h2>0</h2>
+                            <small>Badges</small>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="stat-card logs">
+                            <span class="fa-solid fa-clock-rotate-left"></span>
+                            <h2>0</h2>
+                            <small>Accès</small>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="stat-card failedlogs">
+                            <span
+                                class="fa-solid fa-triangle-exclamation"
+                            ></span>
+                            <h2>0</h2>
+                            <small>Refusés</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="logs beautiful">
+                    <div>
+                        <header>
+                            <h2>
+                                <span class="fa-solid fa-list-check"></span>
+                                Historique
+                            </h2>
+                        </header>
+                        <div class="legend">
+                            <div>
+                                <div class="success"></div>
+                                <p class>Autorisé</p>
+                            </div>
+                            <div>
+                                <div class="failed"></div>
+                                <p class>Refusé</p>
+                            </div>
+                        </div>
+                        <div class="logstable table">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Nom</th>
+                                        <th>Prénom</th>
+                                        <th>UID</th>
+                                        <th>Date</th>
+                                        <th>Heure</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="success">
+                                        <td>havard</td>
+                                        <td>angelo</td>
+                                        <td>C164C101</td>
+                                        <td>16/03/2026</td>
+                                        <td>20:40:18</td>
+                                        <td>Autorisé</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="admin beautiful">
+                    <div>
+                        <header>
+                            <h2>
+                                <span class="fa-solid fa-users-gear"></span>
+                                Ajouter un membre
+                            </h2>
+                        </header>
+                        <form class="adduserform">
+                            <div class="text">
+                                <span class="fa-solid fa-user"></span>
+                                <input
+                                    name="firstname"
+                                    type="text"
+                                    placeholder="Prénom ?"
+                                    required
+                                />
+                            </div>
+                            <div class="text">
+                                <span class="fa-solid fa-user"></span>
+                                <input
+                                    type="text"
+                                    name="lastname"
+                                    placeholder="Nom ?"
+                                    required
+                                />
+                            </div>
+                            <div class="checkbox">
+                                <input name="isadmin" type="checkbox" />
+                                <span class="fa-solid fa-user-tie"></span>
+                                <p>Admin</p>
+                            </div>
+                            <button type="submit">
+                                <span class="fa-solid fa-plus"></span>
+                                <p>Ajouter</p>
+                            </button>
+                        </form>
+                        <hr />
+                        <header>
+                            <h2>
+                                <span class="fa-solid fa-search"></span>
+                                Rechercher
+                            </h2>
+                        </header>
+                        <form class="searchusersform">
+                            <div class="text">
+                                <span class="fa-solid fa-search"></span>
+                                <input
+                                    type="text"
+                                    placeholder="Nom ou Prénom..."
+                                    required
+                                />
+                            </div>
+                        </form>
+                        <div class="legend">
+                            <div>
+                                <div class="user"></div>
+                                <p class>Utilisateur</p>
+                            </div>
+                            <div>
+                                <div class="admin"></div>
+                                <p class>Administrateur</p>
+                            </div>
+                        </div>
+                        <div class="searchresulttable table">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Nom</th>
+                                        <th>Prénom</th>
+                                        <th>Status</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="user">
+                                        <td>havard</td>
+                                        <td>angelo</td>
+                                        <td>Administrateur</td>
+                                        <td><button>voire plus</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="user beautiful">
+                    <div>
+                        <header>
+                            <h2>
+                                <span class="fa-solid fa-user-gear"></span>
+                                <span class="fullname">Firstname Lastname</span>
+                            </h2>
+                        </header>
+                        <form class="deleteuserform">
+                            <button type="button" class="delete">
+                                <span class="fa-solid fa-trash"></span>
+                                <p>Suprimé</p>
+                            </button>
+                        </form>
+                        <hr />
+                        <header>
+                            <h2>
+                                <span class="fa-solid fa-id-card"></span>
+                                Ajouté un badge
+                            </h2>
+                        </header>
+                        <form class="addBadgeForm">
+                            <button type="button" class="tool step1">
+                                <span class="fa-solid fa-microchip"></span>
+                                <p>Scanner un badge</p>
+                            </button>
+                            <div class="text step2 step3">
+                                <span class="fa-solid fa-id-card"></span>
+                                <input
+                                    type="text"
+                                    name="rfid"
+                                    placeholder="Placé votre badge"
+                                    required
+                                    readonly
+                                />
+                            </div>
+                            <button type="button" class="step2">
+                                <span class="fa-solid fa-xmark"></span>
+                                <p>Annulé</p>
+                            </button>
+                            <button type="submit" class="step3">
+                                <span class="fa-solid fa-plus"></span>
+                                <p>Ajouté</p>
+                            </button>
+                        </form>
+                        <hr />
+                        <header>
+                            <h2>
+                                <span class="fa-solid fa-id-card"></span>
+                                List des badge
+                            </h2>
+                        </header>
+                        <div class="searchresulttable table">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>UID</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="badge">
+                                        <td>C164C101</td>
+                                        <td>
+                                            <button class="delete">
+                                                <p>Suprimé</p>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="/lib/sweetalert2.all.min.js"></script>
+        <script src="/app.js"></script>
+    </body>
+</html>
