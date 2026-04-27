@@ -35,7 +35,7 @@ docker compose down
 ### PowerShell / CMD
 
 ```bash
-git clone https://github.com/your-repo-url.git
+git clone https://github.com/angelohavard0/masterpiece-high-school-2025-2026.git
 cd masterpiece-high-school-2025-2026
 docker compose up --build
 ```
